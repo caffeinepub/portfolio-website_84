@@ -1,0 +1,84 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T07:40:53.366Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-6",
+        "summary": "Integrate Internet Identity authentication so the portfolio owner can log in and unlock content editing capabilities. Use the existing useInternetIdentity hook and useActor hook. Add a login/logout button in the Navigation bar (desktop and mobile views) that triggers the Internet Identity flow.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Navigation.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Navigation.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Implement backend Motoko actor functions to store and retrieve editable portfolio content (bio, project entries, contact info) in stable variables. Expose update functions that are gated so only the canister controller/owner principal can call them; read functions remain public.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-8",
+        "summary": "When the portfolio owner is authenticated via Internet Identity, display inline edit controls (text inputs, project add/remove forms) on the Hero, About, and Portfolio sections. On save, call the backend update functions through the authenticated actor. When not authenticated, the site renders in read-only mode using the publicly queried data.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/About.tsx",
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Portfolio.tsx",
+          "frontend/src/components/ProjectCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/Hero.tsx",
+          "frontend/src/components/About.tsx",
+          "frontend/src/components/Contact.tsx",
+          "frontend/src/components/Portfolio.tsx",
+          "frontend/src/components/ProjectCard.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/About.tsx",
+    "frontend/src/components/Contact.tsx",
+    "frontend/src/components/Hero.tsx",
+    "frontend/src/components/Navigation.tsx",
+    "frontend/src/components/Portfolio.tsx",
+    "frontend/src/components/ProjectCard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

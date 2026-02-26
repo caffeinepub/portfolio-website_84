@@ -1,0 +1,70 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add Internet Identity login for portfolio owner content management",
+  "requirements": [
+    {
+      "id": "REQ-6",
+      "summary": "Integrate Internet Identity authentication with login/logout button in Navigation bar for both desktop and mobile views",
+      "acceptanceCriteria": [
+        "A 'Login' button is visible in the Navigation bar when the user is not authenticated",
+        "Clicking 'Login' triggers the Internet Identity authentication flow",
+        "After successful login, the button changes to display 'Logout' (or a user avatar/indicator)",
+        "Clicking 'Logout' ends the session and returns the UI to unauthenticated state",
+        "The login/logout button is accessible on both desktop and mobile (hamburger menu) layouts",
+        "The existing amber/gold theme is applied consistently to the auth button"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navigation.tsx",
+          "operation": "modify",
+          "description": "Add a login/logout button to the Navigation component that uses the existing useInternetIdentity hook. Display 'Login' when unauthenticated and 'Logout' (or user indicator) when authenticated. Include the button in both the desktop navigation links and mobile hamburger menu. Apply the existing amber/gold theme styling (gold-500/gold-400 colors). Handle login via the login() method and logout via clear() followed by queryClient.clear() to reset cached data. Verify the authorization component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Display inline edit controls for authenticated portfolio owner on Hero, About, and Portfolio sections; read-only mode for unauthenticated visitors",
+      "acceptanceCriteria": [
+        "Unauthenticated visitors see the portfolio in read-only mode with no edit controls visible",
+        "Authenticated owner sees edit icons or inline edit buttons on bio, contact details, and project cards",
+        "Editing and saving bio/contact info calls the backend update function and refreshes the displayed data via React Query",
+        "Owner can add a new project card and remove existing ones from the Portfolio section",
+        "All edits are persisted in the backend stable variables and survive page refresh",
+        "Save/cancel controls follow the existing amber/gold dark theme"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Implement React Query hooks for fetching and mutating portfolio content: useGetHeroSection, useGetBio, useGetAbout, useGetContactInfo, useGetAllProjects, useUpdateHeroSection, useUpdateBio, useUpdateAbout, useUpdateContactInfo, useAddProject, useUpdateProject, useDeleteProject. Each query hook should use the useActor hook to call the corresponding backend method. Mutation hooks should invalidate relevant queries on success to refresh displayed data. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Hero.tsx",
+          "operation": "modify",
+          "description": "Modify Hero component to fetch hero section text using the useGetHeroSection query hook. When the user is authenticated (check via useInternetIdentity), display an inline edit button/icon next to the hero section content. On click, show an editable textarea with save/cancel buttons styled with the amber/gold theme. On save, call useUpdateHeroSection mutation and refresh the displayed content. When unauthenticated, render the hero section in read-only mode with no edit controls. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/About.tsx",
+          "operation": "modify",
+          "description": "Modify About component to fetch bio and about text using useGetBio and useGetAbout query hooks. When authenticated, display inline edit icons/buttons next to the bio paragraphs and personal detail cards. Clicking an edit control should show an input field or textarea with save/cancel buttons styled with the amber/gold theme. On save, call the corresponding update mutation (useUpdateBio, useUpdateAbout) and refresh the displayed data. When unauthenticated, render the content in read-only mode with no edit controls. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Contact.tsx",
+          "operation": "modify",
+          "description": "Modify Contact component to fetch contact info using useGetContactInfo query hook. When authenticated, display inline edit icons/buttons next to email, location, phone, and social links. Clicking an edit control should show input fields with save/cancel buttons styled with the amber/gold theme. On save, call useUpdateContactInfo mutation with the updated ContactInfo object and refresh the displayed data. When unauthenticated, render the contact info in read-only mode with no edit controls. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Portfolio.tsx",
+          "operation": "modify",
+          "description": "Modify Portfolio component to fetch projects using useGetAllProjects query hook instead of hardcoded data. When authenticated, display an 'Add Project' button above the project grid and edit/delete icons on each ProjectCard. The 'Add Project' button should open a modal/form for creating a new project (title, description, tech tags, githubLink). On save, call useAddProject mutation. Edit/delete actions should call useUpdateProject and useDeleteProject mutations respectively. All controls should use the amber/gold theme. When unauthenticated, render the project grid in read-only mode with no edit controls. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProjectCard.tsx",
+          "operation": "modify",
+          "description": "Modify ProjectCard component to accept optional onEdit and onDelete callback props. When these callbacks are provided (authenticated owner mode), display edit and delete icon buttons in the card header or corner. When callbacks are not provided (unauthenticated mode), render the card without action buttons. Apply the amber/gold theme to the action buttons for consistency."
+        }
+      ]
+    }
+  ]
+}

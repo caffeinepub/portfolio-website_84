@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Personal portfolio website featuring personal details, profile image, and portfolio showcase section. Adding Internet Identity login so only the owner can update portfolio content.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-hero-section-displaying-a-profile-photo-full-name-professional-title-tagline-and-a-short-bio-paragraph",
+      "title": "Create a Hero section displaying a profile photo, full name, professional title/tagline, and a short bio paragraph.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-about-contact-section-that-lists-personal-details-such-as-email-address-location-social-links-linkedin-github-and-any-other-relevant-contact-information",
+      "title": "Create an About / Contact section that lists personal details such as email address, location, social links (LinkedIn, GitHub), and any other relevant contact information.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-portfolio-projects-section-that-displays-a-grid-of-project-cards-each-card-should-show-a-project-title-short-description-tech-stack-tags-and-an-optional-link",
+      "title": "Create a Portfolio / Projects section that displays a grid of project cards. Each card should show a project title, short description, tech stack tags, and an optional link.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-sticky-navigation-bar-with-smooth-scroll-links-to-each-section-home-about-portfolio-contact-include-a-mobile-hamburger-menu-for-small-screens",
+      "title": "Implement a sticky navigation bar with smooth-scroll links to each section (Home, About, Portfolio, Contact). Include a mobile hamburger menu for small screens.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-distinctive-visual-theme-dark-minimal-aesthetic-with-a-warm-amber-gold-accent-color-clean-sans-serif-typography-subtle-card-shadows-and-consistent-spacing-enforce-the-theme-across-all-sections",
+      "title": "Apply a distinctive visual theme: dark, minimal aesthetic with a warm amber/gold accent color, clean sans-serif typography, subtle card shadows, and consistent spacing. Enforce the theme across all sections.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-internet-identity-authentication-so-the-portfolio-owner-can-log-in-and-unlock-content-editing-capabilities-use-the-existing-useinternetidentity-hook-and-useactor-hook-add-a-login-logout-button-in-the-navigation-bar-desktop-and-mobile-views-that-triggers-the-internet-identity-flow",
+      "title": "Integrate Internet Identity authentication so the portfolio owner can log in and unlock content editing capabilities. Use the existing useInternetIdentity hook and useActor hook. Add a login/logout button in the Navigation bar (desktop and mobile views) that triggers the Internet Identity flow.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-the-portfolio-owner-is-authenticated-via-internet-identity-display-inline-edit-controls-text-inputs-project-add-remove-forms-on-the-hero-about-and-portfolio-sections-on-save-call-the-backend-update-functions-through-the-authenticated-actor-when-not-authenticated-the-site-renders-in-read-only-mode-using-the-publicly-queried-data",
+      "title": "When the portfolio owner is authenticated via Internet Identity, display inline edit controls (text inputs, project add/remove forms) on the Hero, About, and Portfolio sections. On save, call the backend update functions through the authenticated actor. When not authenticated, the site renders in read-only mode using the publicly queried data.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Personal details section (name, bio, contact info)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Profile image display",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Portfolio showcase section to display projects or work",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Internet Identity login so only the owner can update portfolio content",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Implement backend Motoko actor functions to store and retrieve editable portfolio content (bio, project entries, contact info) in stable variables. Expose update functions that are gated so only the canister controller/owner principal can call them; read functions remain public.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Portfolio Website",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

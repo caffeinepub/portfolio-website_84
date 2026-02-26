@@ -1,0 +1,75 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T07:40:53.364Z",
+  "summary": "The diff implements the three core requirements (REQ-6, REQ-7, REQ-8) with substantial coverage. REQ-6 login/logout in Navigation is fully implemented. REQ-8 inline editing for Hero, About, Portfolio, and Contact is implemented. REQ-7 backend has stable variables, public queries, and gated update functions. However, the project data model is missing 'tech tags', the owner principal initialization uses an external access-control mixin with admin token secrets rather than a simple principal-based check, and the useActor.ts file was modified despite being listed as a do-not-modify file.",
+  "missing_requirements": [
+    {
+      "id": "REQ-7",
+      "requirement": "Stable variables store editable content including list of projects with tech tags",
+      "reason": "The Project type in both backend/main.mo and backend/migration.mo defines only {id, title, description, githubLink} with no tech tags field, despite the AC explicitly requiring 'title, description, tech tags, link'.",
+      "evidence": [
+        "backend/main.mo",
+        "backend/migration.mo",
+        "frontend/src/components/Portfolio.tsx"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Owner principal is set once during canister initialization; update functions check caller principal matches owner principal",
+      "reason": "The backend uses an external MixinAuthorization/AccessControl module initialized via a client-supplied admin token secret (_initializeAccessControlWithSecret) rather than a straightforward stable owner-principal variable with principal-equality checks.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "useActor.ts was modified to call _initializeAccessControlWithSecret with a caffeineAdminToken URL/session parameter",
+      "reason": "The build request explicitly lists frontend/src/hooks/useActor.ts as a do-not-modify file, yet the diff shows this file was modified.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "URL parameter persistence utility with caffeineAdminToken support including sessionStorage and hash-param clearing",
+      "reason": "The build request does not mention any admin token URL parameter, caffeineAdminToken, or session-storage-based token persistence. This utility was not requested.",
+      "evidence": [
+        "frontend/src/utils/urlParams.ts"
+      ]
+    },
+    {
+      "description": "User profile CRUD (getCallerUserProfile, getUserProfile, saveCallerUserProfile) and related React Query hooks",
+      "reason": "The build request only requires storing bio, project entries, and contact info. Separate user profile management was not requested.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "description": "MixinAuthorization and AccessControl modules with role-based permissions (#admin, #user) integrated into the backend",
+      "reason": "The build request explicitly lists multi-user or role-based access control as a non-goal, and requires all backend logic in a single Motoko actor. Separate authorization modules with multiple roles exceed the requirements.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.82,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/About.tsx",
+    "frontend/src/components/Contact.tsx",
+    "frontend/src/components/Hero.tsx",
+    "frontend/src/components/Navigation.tsx",
+    "frontend/src/components/Portfolio.tsx",
+    "frontend/src/components/ProjectCard.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json"
+  ]
+}

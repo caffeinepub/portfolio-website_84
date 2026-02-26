@@ -1,0 +1,85 @@
+{
+  "kind": "build_request",
+  "title": "Add Internet Identity login for portfolio owner content management",
+  "projectName": "Portfolio Site",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-6",
+      "text": "Integrate Internet Identity authentication so the portfolio owner can log in and unlock content editing capabilities. Use the existing useInternetIdentity hook and useActor hook. Add a login/logout button in the Navigation bar (desktop and mobile views) that triggers the Internet Identity flow.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "add an Internet Identity login so only you can update your portfolio content"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A 'Login' button is visible in the Navigation bar when the user is not authenticated",
+        "Clicking 'Login' triggers the Internet Identity authentication flow",
+        "After successful login, the button changes to display 'Logout' (or a user avatar/indicator)",
+        "Clicking 'Logout' ends the session and returns the UI to unauthenticated state",
+        "The login/logout button is accessible on both desktop and mobile (hamburger menu) layouts",
+        "The existing amber/gold theme is applied consistently to the auth button"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement backend Motoko actor functions to store and retrieve editable portfolio content (bio, project entries, contact info) in stable variables. Expose update functions that are gated so only the canister controller/owner principal can call them; read functions remain public.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "only you can update your portfolio content"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Stable variables store editable content: bio text, list of projects (title, description, tech tags, link), and contact details",
+        "Public query functions return all stored portfolio data",
+        "Update functions check that the caller principal matches the owner principal and trap/return an error for unauthorized callers",
+        "Owner principal is set once during canister initialization (or via a one-time claim by the first caller)",
+        "Default/seed data is pre-populated so the site renders correctly before the owner has made any edits"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "When the portfolio owner is authenticated via Internet Identity, display inline edit controls (text inputs, project add/remove forms) on the Hero, About, and Portfolio sections. On save, call the backend update functions through the authenticated actor. When not authenticated, the site renders in read-only mode using the publicly queried data.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "only you can update your portfolio content"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated visitors see the portfolio in read-only mode with no edit controls visible",
+        "Authenticated owner sees edit icons or inline edit buttons on bio, contact details, and project cards",
+        "Editing and saving bio/contact info calls the backend update function and refreshes the displayed data via React Query",
+        "Owner can add a new project card and remove existing ones from the Portfolio section",
+        "All edits are persisted in the backend stable variables and survive page refresh",
+        "Save/cancel controls follow the existing amber/gold dark theme"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
+    "All backend logic must remain in a single Motoko actor in backend/main.mo",
+    "Owner-gated update functions must enforce principal-based access control; do not rely on client-side checks alone"
+  ],
+  "nonGoals": [
+    "Multi-user or role-based access control beyond a single owner",
+    "External database or off-chain storage",
+    "Email or social authentication (only Internet Identity)",
+    "Real-time collaboration or live content sync between multiple sessions"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "frontend/src/index.css": "Global styles with dark minimal theme using OKLCH color tokens, amber/gold accent palette, and Google Fonts imports for Inter, Playfair Display, and JetBrains Mono.",
+  "frontend/tailwind.config.js": "Extended Tailwind config with custom font families (Inter, Playfair Display, JetBrains Mono), gold color tokens, card shadows, and fade-in animations.",
+  "frontend/src/hooks/useActiveSection.ts": "Custom hook using IntersectionObserver to track which section is currently visible in the viewport for navigation highlighting.",
+  "frontend/src/hooks/useQueries.ts": "Comprehensive React Query hooks for all backend operations including hero section, bio, about, contact info, projects (CRUD), user profile, and admin check — each with proper cache invalidation.",
+  "frontend/src/components/Navigation.tsx": "Sticky navigation bar with smooth-scroll links, active section highlighting, mobile hamburger menu, and a Login/Logout button using Internet Identity with amber/gold theme styling.",
+  "frontend/src/components/Hero.tsx": "Full-screen hero section that fetches the hero subtitle from the backend and shows an inline edit control (pencil icon → textarea with save/cancel) when the owner is authenticated.",
+  "frontend/src/components/About.tsx": "About section that fetches bio and about text from the backend with inline edit controls (hover-reveal pencil → textarea with save/cancel) visible only to the authenticated owner.",
+  "frontend/src/components/Skills.tsx": "Skills section with categorized progress bars for Frontend/Backend/Tools and a tech tag cloud.",
+  "frontend/src/components/ProjectCard.tsx": "Reusable project card component updated to use the backend Project type, with optional onEdit/onDelete callback props that reveal action buttons on hover for the authenticated owner.",
+  "frontend/src/components/Portfolio.tsx": "Portfolio section that fetches projects from the backend, shows skeleton loading states, and provides Add/Edit/Delete controls with inline forms for the authenticated owner.",
+  "frontend/src/components/Contact.tsx": "Contact section that fetches contact info from the backend and shows an inline edit form (email, phone, location, GitHub) with save/cancel controls for the authenticated owner.",
+  "frontend/src/components/Footer.tsx": "Footer with brand logo, social links, copyright with caffeine.ai attribution, and section navigation links.",
+  "frontend/src/App.tsx": "Root application component wrapping the full page layout in a QueryClientProvider for React Query state management."
+}
